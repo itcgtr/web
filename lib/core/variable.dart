@@ -5,10 +5,12 @@ class Variable extends ChangeNotifier {
   Variable._();
 
   Future<void> init() async {
+    //
     notifyListeners();
   }
 
   void notify() {
+    //
     notifyListeners();
   }
 }
