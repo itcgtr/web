@@ -45,9 +45,9 @@ Widget column_faculty() {
       final count = wide ? 6 : (constraints.maxWidth >= 600 ? 3 : 2);
       return Container(
         color: Colors.teal.withOpacity(0.50),
-        padding: const EdgeInsets.symmetric(vertical: 96),
+        padding: EdgeInsets.symmetric(vertical: 96),
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
+          constraints: BoxConstraints(maxWidth: 1200),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
