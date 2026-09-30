@@ -1,83 +1,67 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    ),
-  );
-}
+class _Column_6State extends State<Column_6> {
+  // ########## BLOCK: Attributes // ##########
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  // ########## END BLOCK: Attributes // ##########
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+  // ########## BLOCK: Design // ##########
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            //
-            column_contact(),
-          ],
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final wide = constraints.maxWidth >= 800;
+        return Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 96),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '06 — CONTACT',
+                  style: TextStyle(
+                    fontSize: 10,
+                    letterSpacing: 1,
+                    color: Colors.amber,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text('Get in Touch', style: TextStyle(fontSize: 32)),
+                const SizedBox(height: 48),
+                wide
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(child: _Info()),
+                          const SizedBox(width: 70),
+                          Expanded(child: _Form()),
+                        ],
+                      )
+                    : Column(
+                        children: [_Info(), const SizedBox(height: 60), _Form()],
+                      ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
+
+  // ########## END BLOCK: Design // ##########
+
+  // ########## BLOCK: Methods // ##########
+
+  // ########## END BLOCK: Method // ##########
 }
 
-Widget column_contact() {
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      final wide = constraints.maxWidth >= 800;
-      return Container(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 96),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 1200),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '06 — CONTACT',
-                style: TextStyle(
-                  fontSize: 10,
-                  letterSpacing: 1,
-                  color: Colors.amber,
-                ),
-              ),
-              const SizedBox(height: 4),
-              const Text('Get in Touch', style: TextStyle(fontSize: 32)),
-              const SizedBox(height: 48),
-              wide
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(child: _Info()),
-                        const SizedBox(width: 70),
-                        Expanded(child: _Form()),
-                      ],
-                    )
-                  : Column(
-                      children: [_Info(), const SizedBox(height: 60), _Form()],
-                    ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
+class Column_6 extends StatefulWidget {
+  const Column_6({super.key});
+
+  @override
+  State<Column_6> createState() => _Column_6State();
 }
 
 class _Info extends StatelessWidget {

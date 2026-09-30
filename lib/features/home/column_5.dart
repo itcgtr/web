@@ -1,47 +1,19 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    ),
-  );
-}
+class _Column_5State extends State<Column_5> {
+  // ########## BLOCK: Attributes // ##########
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  // ########## END BLOCK: Attributes // ##########
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+  // ########## BLOCK: Design // ##########
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: column_news());
-  }
-}
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final wide = constraints.maxWidth >= 700;
+        final narrow = constraints.maxWidth < 600;
 
-const news = <(String, String, String, String)>[
-  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
-  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
-  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
-  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
-];
-
-Widget column_news() {
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      final wide = constraints.maxWidth >= 700;
-      final narrow = constraints.maxWidth < 600;
-
-      return SingleChildScrollView(
-        child: Container(
+        return Container(
           color: Colors.teal.withOpacity(0.50),
           padding: const EdgeInsets.symmetric(vertical: 96),
           child: Center(
@@ -71,7 +43,7 @@ Widget column_news() {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: news.length,
+                    itemCount: _news.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: wide ? 2 : 1,
                       crossAxisSpacing: 1,
@@ -80,7 +52,7 @@ Widget column_news() {
                     ),
                     itemBuilder: (_, i) {
                       return _NewsCard(
-                        data: news[i],
+                        data: _news[i],
                         featured: i == 0,
                         narrow: narrow,
                       );
@@ -90,11 +62,31 @@ Widget column_news() {
               ),
             ),
           ),
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
+  }
+
+  // ########## END BLOCK: Design // ##########
+
+  // ########## BLOCK: Methods // ##########
+
+  // ########## END BLOCK: Method // ##########
 }
+
+class Column_5 extends StatefulWidget {
+  const Column_5({super.key});
+
+  @override
+  State<Column_5> createState() => _Column_5State();
+}
+
+const _news = <(String, String, String, String)>[
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+];
 
 class _NewsCard extends StatelessWidget {
   final (String, String, String, String) data;

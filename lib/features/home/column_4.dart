@@ -1,100 +1,84 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    ),
-  );
-}
+class _Column_4State extends State<Column_4> {
+  // ########## BLOCK: Attributes // ##########
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  // ########## END BLOCK: Attributes // ##########
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+  // ########## BLOCK: Design // ##########
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            //
-            column_faculty(),
-          ],
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const faculty = <(String, String, String, String, String)>[];
+        final wide = constraints.maxWidth >= 1000;
+        final count = wide ? 6 : (constraints.maxWidth >= 600 ? 3 : 2);
+        return Container(
+          color: Colors.teal.withOpacity(0.50),
+          padding: EdgeInsets.symmetric(vertical: 96),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 1200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '04 — FACULTY',
+                  style: TextStyle(
+                    fontSize: 10,
+                    letterSpacing: 1,
+                    color: Colors.amber,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                const Text('Our Faculty', style: TextStyle(fontSize: 32)),
+                const SizedBox(height: 48),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: faculty.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: count,
+                    crossAxisSpacing: 1,
+                    mainAxisSpacing: 1,
+                    childAspectRatio: .62,
+                  ),
+                  itemBuilder: (_, i) => _FacultyCard(data: faculty[i]),
+                ),
+                const SizedBox(height: 28),
+                Center(
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      side: const BorderSide(color: Colors.black26),
+                      shape: const RoundedRectangleBorder(),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text('VIEW ALL →'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
+
+  // ########## END BLOCK: Design // ##########
+
+  // ########## BLOCK: Methods // ##########
+
+  // ########## END BLOCK: Method // ##########
 }
 
-Widget column_faculty() {
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      const faculty = <(String, String, String, String, String)>[];
-      final wide = constraints.maxWidth >= 1000;
-      final count = wide ? 6 : (constraints.maxWidth >= 600 ? 3 : 2);
-      return Container(
-        color: Colors.teal.withOpacity(0.50),
-        padding: EdgeInsets.symmetric(vertical: 96),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 1200),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '04 — FACULTY',
-                style: TextStyle(
-                  fontSize: 10,
-                  letterSpacing: 1,
-                  color: Colors.amber,
-                ),
-              ),
-              const SizedBox(height: 4),
-              const Text('Our Faculty', style: TextStyle(fontSize: 32)),
-              const SizedBox(height: 48),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: faculty.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: count,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 1,
-                  childAspectRatio: .62,
-                ),
-                itemBuilder: (_, i) => _FacultyCard(data: faculty[i]),
-              ),
-              const SizedBox(height: 28),
-              Center(
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    side: const BorderSide(color: Colors.black26),
-                    shape: const RoundedRectangleBorder(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
-                    ),
-                  ),
-                  child: const Text('VIEW ALL →'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
+class Column_4 extends StatefulWidget {
+  const Column_4({super.key});
+
+  @override
+  State<Column_4> createState() => _Column_4State();
 }
 
 class _FacultyCard extends StatelessWidget {
