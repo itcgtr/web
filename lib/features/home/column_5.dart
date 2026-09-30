@@ -23,45 +23,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            //
-            column_news(),
-          ],
-        ),
-      ),
-    );
+    return Scaffold(body: column_news());
   }
 }
 
 const news = <(String, String, String, String)>[
-  (
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-  ),
-  (
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-  ),
-  (
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-  ),
-  (
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-    'PLACEHOLDER',
-  ),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
+  ('PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER', 'PLACEHOLDER'),
 ];
 
 Widget column_news() {
@@ -69,42 +39,56 @@ Widget column_news() {
     builder: (context, constraints) {
       final wide = constraints.maxWidth >= 700;
       final narrow = constraints.maxWidth < 600;
-      return Container(
-        color: Colors.teal.withOpacity(0.50),
-        padding: EdgeInsets.symmetric(vertical: 96),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 1200),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '05 — NEWS',
-                style: TextStyle(
-                  fontSize: 10,
-                  letterSpacing: 1,
-                  color: Colors.amber,
-                ),
+
+      return SingleChildScrollView(
+        child: Container(
+          color: Colors.teal.withOpacity(0.50),
+          padding: const EdgeInsets.symmetric(vertical: 96),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '05 — NEWS',
+                    style: TextStyle(
+                      fontSize: 10,
+                      letterSpacing: 1,
+                      color: Colors.amber,
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  const Text(
+                    'Latest from the Department',
+                    style: TextStyle(fontSize: 32),
+                  ),
+
+                  const SizedBox(height: 48),
+
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: news.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: wide ? 2 : 1,
+                      crossAxisSpacing: 1,
+                      mainAxisSpacing: 1,
+                      childAspectRatio: wide ? 1.5 : 1.25,
+                    ),
+                    itemBuilder: (_, i) {
+                      return _NewsCard(
+                        data: news[i],
+                        featured: i == 0,
+                        narrow: narrow,
+                      );
+                    },
+                  ),
+                ],
               ),
-              const SizedBox(height: 4),
-              const Text(
-                'Latest from the Department',
-                style: TextStyle(fontSize: 32),
-              ),
-              const SizedBox(height: 48),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: news.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: wide ? 2 : 1,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 1,
-                  childAspectRatio: wide ? 1.5 : 1.25,
-                ),
-                itemBuilder: (_, i) =>
-                    _NewsCard(data: news[i], featured: i == 0, narrow: narrow),
-              ),
-            ],
+            ),
           ),
         ),
       );
@@ -116,11 +100,13 @@ class _NewsCard extends StatelessWidget {
   final (String, String, String, String) data;
   final bool featured;
   final bool narrow;
+
   const _NewsCard({
     required this.data,
     required this.featured,
     required this.narrow,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -144,7 +130,9 @@ class _NewsCard extends StatelessWidget {
                   ),
                 ),
               ),
+
               const SizedBox(width: 10),
+
               Flexible(
                 child: Text(
                   data.$1,
@@ -153,9 +141,13 @@ class _NewsCard extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 14),
+
           Text(data.$3, style: TextStyle(fontSize: narrow ? 17 : 20)),
+
           const SizedBox(height: 10),
+
           Text(
             data.$4,
             style: const TextStyle(
