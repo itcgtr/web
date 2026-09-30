@@ -2,7 +2,7 @@
 import "package:flutter/material.dart";
 
 // * ការកំណត់ theme របស់កម្មវិធី
-ThemeData theme_data = ThemeData(
+ThemeData themeData = ThemeData(
   // * ពុម្ពអក្សរលំនាំដើម
   fontFamily: "Nokora",
 
