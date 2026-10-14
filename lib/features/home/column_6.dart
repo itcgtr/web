@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:web/core/app_color.dart';
 
 class _Column_6State extends State<Column_6> {
@@ -13,8 +14,8 @@ class _Column_6State extends State<Column_6> {
       color: app_color.white,
       padding: const EdgeInsets.symmetric(vertical: 40),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: .spaceEvenly,
+        crossAxisAlignment: .start,
         children: [
           const SizedBox(width: 20),
           Expanded(flex: 1, child: Container()),
@@ -23,7 +24,7 @@ class _Column_6State extends State<Column_6> {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: .start,
                 children: [
                   Row(
                     children: [
@@ -34,7 +35,6 @@ class _Column_6State extends State<Column_6> {
                           fontWeight: FontWeight.w600,
                           letterSpacing: 2.5,
                           color: app_color.gold,
-                          fontFamily: 'Nakora',
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -51,7 +51,6 @@ class _Column_6State extends State<Column_6> {
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
                       color: app_color.text,
-                      fontFamily: 'Nakora',
                       letterSpacing: -0.5,
                     ),
                   ),
@@ -59,23 +58,18 @@ class _Column_6State extends State<Column_6> {
 
                   LayoutBuilder(
                     builder: (context, constraints) {
-                      final wide = constraints.maxWidth >= 800;
-                      if (wide) {
+                      if (_isWide(constraints.maxWidth)) {
                         return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: .start,
                           children: [
-                            Expanded(child: _Info()),
-                            const SizedBox(width: 70),
-                            Expanded(child: _Form()),
+                            const Expanded(child: _Info()),
+                            const SizedBox(width: 50),
+                            const Expanded(child: _Form()),
                           ],
                         );
                       }
-                      return Column(
-                        children: [
-                          _Info(),
-                          const SizedBox(height: 60),
-                          _Form(),
-                        ],
+                      return const Column(
+                        children: [_Info(), SizedBox(height: 48), _Form()],
                       );
                     },
                   ),
@@ -88,11 +82,10 @@ class _Column_6State extends State<Column_6> {
       ),
     );
   }
-
   // ########## END BLOCK: Design // ##########
 
   // ########## BLOCK: Methods // ##########
-
+  bool _isWide(double width) => width >= 680;
   // ########## END BLOCK: Method // ##########
 }
 
@@ -103,17 +96,34 @@ class Column_6 extends StatefulWidget {
   State<Column_6> createState() => _Column_6State();
 }
 
+class _ContactDetail {
+  final String label;
+  final String value;
+
+  const _ContactDetail({required this.label, required this.value});
+}
+
+const List<_ContactDetail> _contactDetails = [
+  _ContactDetail(
+    label: 'Address',
+    value: 'Building 12, Floor 3, University Campus, Phnom Penh',
+  ),
+  _ContactDetail(label: 'Phone', value: '+855 23 123 456'),
+  _ContactDetail(label: 'Email', value: 'telecom@university.edu.kh'),
+  _ContactDetail(
+    label: 'Office Hours',
+    value: 'Monday – Friday, 8:00 AM – 5:00 PM',
+  ),
+];
+
 class _Info extends StatelessWidget {
+  const _Info();
+
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: .start,
     children: [
-      for (final item in [
-        ('Address', 'Building 12, Floor 3, University Campus, Phnom Penh'),
-        ('Phone', '+855 23 123 456'),
-        ('Email', 'telecom@university.edu.kh'),
-        ('Office Hours', 'Monday – Friday, 8:00 AM – 5:00 PM'),
-      ])
+      for (final detail in _contactDetails)
         Container(
           width: double.infinity,
           padding: const EdgeInsets.only(bottom: 18, top: 8),
@@ -121,25 +131,23 @@ class _Info extends StatelessWidget {
             border: Border(bottom: BorderSide(color: app_color.border)),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: .start,
             children: [
               Text(
-                item.$1.toUpperCase(),
+                detail.label.toUpperCase(),
                 style: TextStyle(
                   fontSize: 9,
                   color: app_color.gold,
                   letterSpacing: 1.1,
-                  fontFamily: 'Nakora',
                 ),
               ),
               const SizedBox(height: 6),
               Text(
-                item.$2,
+                detail.value,
                 style: TextStyle(
                   fontSize: 14,
                   color: app_color.textMid,
                   height: 1.6,
-                  fontFamily: 'Nakora',
                 ),
               ),
             ],
@@ -150,25 +158,27 @@ class _Info extends StatelessWidget {
 }
 
 class _Form extends StatelessWidget {
+  const _Form();
+
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: .start,
     children: [
       Text(
         'Send a Message',
-        style: TextStyle(
-          fontSize: 23,
-          color: app_color.text,
-          fontFamily: 'Nakora',
-        ),
+        style: TextStyle(fontSize: 23, color: app_color.text),
       ),
       const SizedBox(height: 22),
-      _Field(label: 'Full Name', hint: 'Enter your full name'),
-      _Field(label: 'Email Address', hint: 'Enter your email'),
-      _Field(label: 'Subject', hint: 'Enter subject'),
-      _Field(label: 'Message', hint: 'Write your message here...', lines: 5),
+      const _Field(label: 'Full Name', hint: 'Enter your full name'),
+      const _Field(label: 'Email Address', hint: 'Enter your email'),
+      const _Field(label: 'Subject', hint: 'Enter subject'),
+      const _Field(
+        label: 'Message',
+        hint: 'Write your message here...',
+        lines: 5,
+      ),
       Align(
-        alignment: Alignment.centerLeft,
+        alignment: .centerLeft,
         child: TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
@@ -177,13 +187,12 @@ class _Form extends StatelessWidget {
             shape: const RoundedRectangleBorder(),
             padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
           ),
-          child: Text(
+          child: const Text(
             'SEND MESSAGE',
             style: TextStyle(
               fontSize: 10,
               letterSpacing: 1,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Nakora',
             ),
           ),
         ),
@@ -193,14 +202,17 @@ class _Form extends StatelessWidget {
 }
 
 class _Field extends StatelessWidget {
-  final String label, hint;
+  final String label;
+  final String hint;
   final int lines;
+
   const _Field({required this.label, required this.hint, this.lines = 1});
+
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.only(bottom: 16),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: .start,
       children: [
         Text(
           label.toUpperCase(),
@@ -208,21 +220,16 @@ class _Field extends StatelessWidget {
             fontSize: 9,
             color: app_color.textMuted,
             letterSpacing: 1,
-            fontFamily: 'Nakora',
           ),
         ),
         const SizedBox(height: 6),
         TextField(
           maxLines: lines,
           minLines: lines,
-          style: TextStyle(fontSize: 14, fontFamily: 'Nakora'),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(
-              fontSize: 13,
-              color: app_color.textMuted,
-              fontFamily: 'Nakora',
-            ),
+            hintStyle: TextStyle(fontSize: 13, color: app_color.textMuted),
             filled: true,
             fillColor: app_color.bgAlt,
             contentPadding: const EdgeInsets.symmetric(
